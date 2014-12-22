@@ -2,6 +2,7 @@ var $ = require('jquery');
 var React = require('react');
 
 var Login = require('./Login.jsx');
+var Dashboard = require('./Dashboard.jsx');
 
 var App = React.createClass({
   getInitialState: function() {
@@ -22,11 +23,17 @@ var App = React.createClass({
     if (!this.state.user) {
       page = <Login />;
     } else {
-      page = <p>Test</p>;
+      page = <Dashboard user={this.state.user} />;
     }
     return (
-      <div>
-        {page}
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <h1>GitHub Followers</h1>
+            <p className="subtitle">Get <strong>free GitHub followers</strong> by automatically following other users.</p>
+            {page}
+          </div>
+        </div>
       </div>
     );
   }
