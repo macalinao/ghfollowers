@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/simplyianm/githubfollowers/issues"
   },
-  "homepage": "https://github.com/simplyianm/githubfollowers"
+  "homepage": "https://github.com/simplyianm/githubfollowers",
+  "dependencies": {
+    "express": "^4.10.6"
+  }
 }
