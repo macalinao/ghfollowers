@@ -1,17 +1,32 @@
+var $ = require('jquery');
 var React = require('react');
-var RouteHandler = require('react-router').RouteHandler;
+
+var Login = require('./Login.jsx');
 
 var App = React.createClass({
+  getInitialState: function() {
+    return {};
+  },
+  
+  componentDidMount: function() {
+    $.get('/user', function(result) {
+      if (result.error) return;
+      this.setState({
+        user: result
+      });
+    }.bind(this));
+  },
+
   render: function() {
+    var page;
+    if (!this.state.user) {
+      page = <Login />;
+    } else {
+      page = <p>Test</p>;
+    }
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <h1>GitHub Followers</h1>
-            <p>Click the button below to get <strong>free GitHub Followers</strong>!</p>
-          </div>
-        </div>
-        <RouteHandler />
+      <div>
+        {page}
       </div>
     );
   }
