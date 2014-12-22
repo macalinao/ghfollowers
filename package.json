@@ -25,6 +25,7 @@
     "backbone": "^1.1.2",
     "bootstrap": "^3.3.1",
     "express": "^4.10.6",
+    "express-session": "^1.9.3",
     "flux": "^2.0.1",
     "github": "^0.2.3",
     "github-oauth": "^0.2.0",
