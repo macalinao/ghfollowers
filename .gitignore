@@ -1,4 +1,6 @@
+.env
 bower_components/
 node_modules/
 client/assets/
+client/scripts/
 dist/
