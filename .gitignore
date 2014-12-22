@@ -1,1 +1,4 @@
+bower_components/
 node_modules/
+client/assets/
+dist/
