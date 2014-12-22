@@ -2,76 +2,37 @@
 
 var gulp = require('gulp');
 var bower = require('main-bower-files');
+var browserify = require('browserify');
 var concat = require('gulp-concat');
-var inject = require('gulp-inject');
-var react = require('gulp-react');
+var source = require('vinyl-source-stream');
+var reactify = require('reactify');
 var rev = require('gulp-rev');
 var rimraf = require('rimraf');
-var minifyCSS = require('gulp-minify-css');
-var uglify = require('gulp-uglify');
 
 gulp.task('clean', function(cb) {
-  rimraf('dist/', function() {
-    rimraf('client/assets/', cb);
-  });
+  rimraf('dist/', cb);
 });
 
-gulp.task('bower:css', ['clean'], function() {
-  return gulp.src(bower().filter(function(file) {
-      return file.indexOf('.css') === file.length - 4;
-    }))
-    .pipe(gulp.dest('client/assets/css/'));
+gulp.task('browserify', ['clean'], function() {
+  var b = browserify();
+  b.transform(reactify); // use the reactify transform
+  b.add('./client/scripts/app.jsx');
+  return b.bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('bower:js', ['clean'], function() {
-  return gulp.src(bower().filter(function(file) {
-      return file.indexOf('.js') === file.length - 3;
-    }))
-    .pipe(gulp.dest('client/assets/js/'));
+gulp.task('styles', ['clean'], function() {
+  gulp.src(['bower_components/bootstrap/dist/css/bootstrap.css', 'client/css/*'])
+    .pipe(concat('style.css'))
+    .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('bower', ['bower:css', 'bower:js'], function() {});
-
-gulp.task('react', ['clean'], function() {
-  return gulp.src('client/jsx/*.jsx')
-    .pipe(react())
-    .pipe(gulp.dest('client/scripts/'));
-});
-
-gulp.task('inject', ['bower'], function() {
-  var cssSources = gulp.src(['client/assets/css/*', 'client/css/*.css']);
-  var jsSources = gulp.src(['client/assets/js/*', 'client/scripts/*.js']);
-
+gulp.task('html', ['clean'], function() {
   gulp.src(['client/index.html'])
-    .pipe(inject(cssSources, {
-      relative: true
-    }))
-    .pipe(inject(jsSources, {
-      relative: true
-    }))
-    .pipe(gulp.dest('client/'));
+    .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('client/**/*', ['react', 'inject']);
-});
-
-gulp.task('dist:css', ['bower:css'], function() {
-  return gulp.src(['client/assets/css/*.css'])
-    .pipe(concat('vendor.css'))
-    .pipe(minifyCSS())
-    .pipe(rev())
-    .pipe(gulp.dest('dist/assets/'));
-});
-
-gulp.task('dist:js', ['bower:js'], function() {
-  return gulp.src(['client/assets/js/*.js'])
-    .pipe(concat('vendor.js'))
-    .pipe(uglify())
-    .pipe(rev())
-    .pipe(gulp.dest('dist/assets/'));
-});
-
-gulp.task('dist', ['dist:css', 'dist:js', 'react'], function() {
-
+  gulp.watch('client/**/*', ['browserify', 'styles', 'html']);
 });
