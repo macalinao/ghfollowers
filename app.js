@@ -32,6 +32,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(require('morgan')('dev'));
 }
 
+// Ghetto error handling
+app.use(function(err, req, res, next) {
+  console.error(err);
+  res.send('Error');
+});
+
 // Routes
 require('./lib/routes')(app);
 
