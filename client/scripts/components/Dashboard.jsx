@@ -47,15 +47,6 @@ var Dashboard = React.createClass({
     var peopleCt = this.state.privilege.referrals;
     var people = peopleCt === 1 ? (peopleCt + ' person') : (peopleCt + ' people');
 
-    var followerList;
-    if (this.state.following.length === 0) {
-      followerList = <p>Nobody is following you from this website. Click the "Get Followers" button to get some followers!</p>;
-    } else {
-      followerList = this.state.following.map(function(follower) {
-        return <Follower follower={follower} />;
-      });
-    }
-
     var getFollowers;
     if (!this.state.amount) {
       if (this.state.cap && this.state.following.length === this.state.cap) {
@@ -70,6 +61,28 @@ var Dashboard = React.createClass({
           <button id="getFollowers" className="btn btn-primary btn-lg" onClick={this.follow}>Get Followers</button>
         </div>
       );
+    }
+
+    var followingList;
+    if (this.state.following.length === 0) {
+      followingList = <p>Nobody is following you from this website. Click the "Get Followers" button to get some followers!</p>;
+    } else {
+      followingList = this.state.following.map(function(follower) {
+        return <Follower key={follower.login} follower={follower} />;
+      });
+    }
+
+    var followedByList;
+    if (this.state.user && this.state.user.followedBy) {
+      followedByList = (
+        <ul>
+          {this.state.user.followedBy.map(function(item) {
+            return <li key={item}><a href="https://github.com/{item}">{item}</a></li>;
+          })}
+        </ul>
+      );
+    } else {
+      followedByList = <p>Nobody is following you. Click the "Get Followers" button to get some followers!</p>;
     }
 
     return (
@@ -91,9 +104,12 @@ var Dashboard = React.createClass({
             <p>You can get up to <strong>{this.state.cap}</strong> total followers. You currently have <strong>{this.state.following.length}</strong>. Refer some friends to raise this limit!</p>
           </div>
           <div className="col-md-8">
+            <h2>People you follow</h2>
+            <p>Below are the people you follow as a result of joining this website.</p>
+            {followingList}
             <h2>People following you</h2>
-            <p>Below are the people following you as a result of joining this website.</p>
-            {followerList}
+            <p>Here are the people following you from this website.</p>
+            {followedByList}
           </div>
         </div>
       </div>
