@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha -R spec",
-    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp prepare"
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp"
   },
   "private": true,
   "repository": {

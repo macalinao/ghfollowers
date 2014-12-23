@@ -28,14 +28,14 @@ gulp.task('styles', ['clean'], function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('html', ['clean'], function() {
-  gulp.src(['client/index.html'])
+gulp.task('copy', ['clean'], function() {
+  gulp.src(['public/*'])
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('prepare', ['browserify', 'styles', 'html'], function() {
+gulp.task('default', ['browserify', 'styles', 'copy'], function() {
 });
 
-gulp.task('watch', ['prepare'], function() {
-  gulp.watch('client/**/*', ['prepare']);
+gulp.task('watch', ['default'], function() {
+  gulp.watch('client/**/*', ['default']);
 });
