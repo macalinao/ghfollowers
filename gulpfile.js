@@ -33,6 +33,9 @@ gulp.task('html', ['clean'], function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('watch', function() {
-  gulp.watch('client/**/*', ['browserify', 'styles', 'html']);
+gulp.task('prepare', ['browserify', 'styles', 'html'], function() {
+});
+
+gulp.task('watch', ['prepare'], function() {
+  gulp.watch('client/**/*', ['prepare']);
 });

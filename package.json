@@ -4,7 +4,8 @@
   "description": "Get GitHub followers.",
   "main": "app.js",
   "scripts": {
-    "test": "./node_modules/bin/mocha"
+    "test": "./node_modules/bin/mocha",
+    "postinstall": "./node_modules/bin/gulp prepare"
   },
   "repository": {
     "type": "git",
@@ -33,9 +34,7 @@
     "jquery": "^2.1.3",
     "lodash": "^2.4.1",
     "monk": "^0.9.1",
-    "react": "^0.12.2"
-  },
-  "devDependencies": {
+    "react": "^0.12.2",
     "browserify": "^7.0.3",
     "gulp": "^3.8.10",
     "gulp-concat": "^2.4.2",
