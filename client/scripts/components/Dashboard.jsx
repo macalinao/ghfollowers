@@ -9,9 +9,11 @@ var Dashboard = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <p>Welcome, {this.props.user.login}</p>
-        <button onClick={this.follow}>Get Followers</button>
+      <div className="row">
+        <div className="col-md-12 text-center">
+          <p>Welcome, {this.props.user.login}</p>
+          <button className="btn btn-primary btn-lg" onClick={this.follow}>Get Followers</button>
+        </div>
       </div>
     );
   }

@@ -15,6 +15,8 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(require('prerender-node'));
+
 // Get GitHub user
 app.use(function(req, res, next) {
   if (req.session.token) {

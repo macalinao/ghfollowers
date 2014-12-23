@@ -41,6 +41,7 @@
     "lodash": "^2.4.1",
     "main-bower-files": "^2.4.1",
     "monk": "^0.9.1",
+    "prerender-node": "^1.2.0",
     "react": "^0.12.2",
     "reactify": "^0.17.1",
     "rimraf": "^2.2.8",
