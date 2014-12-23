@@ -14,8 +14,9 @@ var Dashboard = React.createClass({
     return {
       privilege: {
         referrals: 0,
-        count: config.baseFollowers
+        count: config.baseFollowers,
       },
+      cap: 0,
       following: []
     };
   },
@@ -57,7 +58,11 @@ var Dashboard = React.createClass({
 
     var getFollowers;
     if (!this.state.amount) {
-      getFollowers = <p>You can't get any more followers at this time. Refer some friends to get more!</p>;
+      if (this.state.cap && this.state.following.length === this.state.cap) {
+        getFollowers = <p>You have reached the maximum amount of followers. Refer some friends to increase your limit!</p>;
+      } else {
+        getFollowers = <p>There aren't enough users on the website to get you more followers. Refer your friends to increase your follower count!</p>
+      }
     } else {
       getFollowers = (
         <div>
@@ -82,6 +87,8 @@ var Dashboard = React.createClass({
             <p>You've referred {people}. For each person you get to sign up using your referral link, you'll get <strong>{config.referralBonus}</strong> more followers!</p>
             <h3>Your referral link</h3>
             <input id="referLink" type="text" className="form-control" value={window.location.origin + '/?ref=' + this.props.user.login} readOnly={true} onFocus={this.selectReferLink} />
+            <h2>Cap</h2>
+            <p>You can get up to <strong>{this.state.cap}</strong> total followers. You currently have <strong>{this.state.following.length}</strong>. Refer some friends to raise this limit!</p>
           </div>
           <div className="col-md-8">
             <h2>People following you</h2>
