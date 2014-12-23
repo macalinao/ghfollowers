@@ -19,6 +19,15 @@ app.use(require('prerender-node'));
 // Middleware to add GH user to request object
 app.use(require('./lib/github_user_middleware'));
 
+// Referral links
+app.use(function(req, res, next) {
+  if (req.query.ref) {
+    req.session.ref = req.query.ref;
+  }
+  next();
+});
+
+
 // SPA
 app.use(express.static('dist/'));
 

@@ -2,12 +2,13 @@ var React = require('react');
 
 var Login = React.createClass({
   render: function() {
+    var loginLink = '/login' + (this.props.ref ? '?ref=' + this.props.ref : '');
     return (
       <div>
         <div className="row">
           <div className="col-md-12">
             <p>Sign in to GitHub to start!</p>
-            <a className="btn btn-primary btn-lg" href="/login">
+            <a className="btn btn-primary btn-lg" href={loginLink}>
               Login with GitHub
             </a>
           </div>
