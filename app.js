@@ -4,15 +4,7 @@ var db = require('./lib/db');
 var users = db.get('users');
 var session = require('express-session');
 
-var githubOAuth = require('github-oauth')({
-  githubClient: process.env.GITHUB_CLIENT_ID,
-  githubSecret: process.env.GITHUB_SECRET,
-  baseURL: (process.env.NODE_ENV === 'production') ? 'http://www.githubfollowers.com' : 'http://localhost:3000',
-  loginURI: '/login',
-  callbackURI: '/oauth_callback',
-  scope: 'user:follow'
-});
-
+var githubOAuth = require('./lib/github_oauth');
 var app = express();
 var newGithub = require('./lib/new_github');
 var addFollowers = require('./lib/follow');
