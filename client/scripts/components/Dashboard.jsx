@@ -21,18 +21,22 @@ var Dashboard = React.createClass({
   },
 
   componentDidMount: function() {
+    this.updateMe();
+  },
+
+  follow: function() {
+    $.post('/follow/' + this.props.user.login, function(res) {
+      this.updateMe();
+    }.bind(this));
+  },
+
+  updateMe: function() {
     $.get('/me', function(res) {
       this.setState({
         privilege: res.privilege,
         following: res.following
       });
     }.bind(this));
-  },
-
-  follow: function() {
-    $.post('/follow/' + this.props.user.login, function(res) {
-      console.log(res);
-    });
   },
 
   selectReferLink: function() {
