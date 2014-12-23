@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var config = require('../../../config.js');
 var React = require('react');
+var bootstrap = require('bootstrap');
 
 var Follower = require('./Follower.jsx');
 
@@ -26,6 +27,9 @@ var Dashboard = React.createClass({
 
   follow: function() {
     $.post('/follow/' + this.props.user.login, function(res) {
+      if (res.follows === 0) {
+        alert('There aren\'t enough people registered to give you more followers. Invite more people!');
+      }
       this.updateMe();
     }.bind(this));
   },
