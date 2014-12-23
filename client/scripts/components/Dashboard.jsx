@@ -78,7 +78,7 @@ var Dashboard = React.createClass({
       followedByList = (
         <ul>
           {this.state.user.followedBy.map(function(item) {
-            return <li key={item}><a href="https://github.com/{item}">{item}</a></li>;
+            return <li key={item}><a href={'https://github.com/' + item}>{item}</a></li>;
           })}
         </ul>
       );
