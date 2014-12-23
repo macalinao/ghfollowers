@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha -R spec",
-    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp"
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp dist"
   },
   "private": true,
   "repository": {
@@ -38,7 +38,10 @@
     "github-oauth": "^0.2.0",
     "gulp": "^3.8.10",
     "gulp-concat": "^2.4.2",
+    "gulp-minify-css": "^0.3.11",
+    "gulp-minify-html": "^0.1.8",
     "gulp-rev": "^2.0.1",
+    "gulp-uglify": "^1.0.2",
     "hiredis": "^0.1.17",
     "jquery": "^2.1.3",
     "lodash": "^2.4.1",
@@ -50,6 +53,7 @@
     "reactify": "^0.17.1",
     "redis": "^0.12.1",
     "rimraf": "^2.2.8",
+    "run-sequence": "^1.0.2",
     "vinyl-source-stream": "^1.0.0"
   }
 }
