@@ -84,8 +84,8 @@ var Dashboard = React.createClass({
             <input id="referLink" type="text" className="form-control" value={window.location.origin + '/?ref=' + this.props.user.login} readOnly={true} onFocus={this.selectReferLink} />
           </div>
           <div className="col-md-8">
-            <h2>Your followed users</h2>
-            <p>Below are the people you're following that are part of this website.</p>
+            <h2>People following you</h2>
+            <p>Below are the people following you as a result of joining this website.</p>
             {followerList}
           </div>
         </div>
