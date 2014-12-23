@@ -1,12 +1,9 @@
 var express = require('express');
+
 var app = express();
 
 // Enable sessions
-app.use(require('express-session')({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-}));
+require('./lib/session')(app);
 
 // Body parser
 app.use(require('body-parser').urlencoded({

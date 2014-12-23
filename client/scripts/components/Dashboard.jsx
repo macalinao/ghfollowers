@@ -1,7 +1,6 @@
 var $ = require('jquery');
 var config = require('../../../config.js');
 var React = require('react');
-var bootstrap = require('bootstrap');
 
 var Follower = require('./Follower.jsx');
 
