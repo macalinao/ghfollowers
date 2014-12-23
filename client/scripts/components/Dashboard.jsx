@@ -48,7 +48,7 @@ var Dashboard = React.createClass({
 
     var followerList;
     if (this.state.following.length === 0) {
-      followerList = <p>You aren't following anyone. Click the "Get Followers" button to get some followers!</p>;
+      followerList = <p>Nobody is following you from this website. Click the "Get Followers" button to get some followers!</p>;
     } else {
       followerList = this.state.following.map(function(follower) {
         return <Follower follower={follower} />;
