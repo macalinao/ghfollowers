@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Ghetto error handling
 app.use(function(err, req, res, next) {
-  console.error(err);
+  console.error(err.stack);
   res.send('Error');
 });
 
