@@ -35,10 +35,7 @@ var Dashboard = React.createClass({
 
   updateMe: function() {
     $.get('/me', function(res) {
-      this.setState({
-        privilege: res.privilege,
-        following: res.following
-      });
+      this.setState(res);
     }.bind(this));
   },
 
