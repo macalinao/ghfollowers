@@ -65,7 +65,7 @@ var Dashboard = React.createClass({
       getFollowers = (
         <div>
           <p>You can get <strong>{this.state.amount}</strong> more followers by clicking the button below!</p>
-          <button className="btn btn-primary btn-lg" onClick={this.follow}>Get Followers</button>
+          <button id="getFollowers" className="btn btn-primary btn-lg" onClick={this.follow}>Get Followers</button>
         </div>
       );
     }
