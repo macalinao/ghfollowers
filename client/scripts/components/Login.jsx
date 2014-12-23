@@ -23,8 +23,8 @@ var Login = React.createClass({
             <p><strong>Absolutely.</strong> The GitHub terms of service only state that you are responsible for all activity that occurs under your account. Because all we ask for is the <code>user:follow</code> permission, we can't do anything malicious with your account. In fact, the source code to this website is available <a href="https://github.com/simplyianm/githubfollowers">here</a>!</p>
           </div>
           <div className="col-md-4">
-            <h2>Can I unfollow users I've automatically followed?</h2>
-            <p><strong>Yes, but you'll get unfollowed.</strong> This app depends on having legitimate, non-botted people following each other, so breaking the trust destroys our service. We'll remove all our followers from your account if we find you doing this.</p>
+            <h2>Can I unfollow users you've followed for me?</h2>
+            <p><strong>Yes, but you'll get unfollowed.</strong> This app depends on having legitimate, non-botted people following each other, so breaking the trust destroys our service. We'll remove that follower from your account if we detect you've unfollowed someone.</p>
           </div>
         </div>
       </div>
