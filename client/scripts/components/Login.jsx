@@ -24,7 +24,7 @@ var Login = React.createClass({
           </div>
           <div className="col-md-4">
             <h2>Can I unfollow users you've followed for me?</h2>
-            <p><strong>Yes, but you'll get unfollowed.</strong> This app depends on having legitimate, non-botted people following each other, so breaking the trust destroys our service. We'll remove that follower from your account if we detect you've unfollowed someone.</p>
+            <p><strong>Yes, but you'll permanently lower your cap.</strong> This app depends on having legitimate, non-botted people following each other, so breaking the trust destroys our service. We'll lower your follower cap to compensate for the unfollowed user.</p>
           </div>
         </div>
       </div>
