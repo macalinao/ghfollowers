@@ -79,6 +79,7 @@ var Dashboard = React.createClass({
           <div className="col-md-12 text-center">
             <p>Hi {this.props.user.login}!</p>
             {getFollowers}
+            <a className="btn btn-danger" href="/logout">Logout</a>
           </div>
         </div>
         <div className="row">
