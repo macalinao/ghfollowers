@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var config = require('../../../config.js');
 var React = require('react');
 
 // Quick fix
@@ -11,7 +12,7 @@ var Dashboard = React.createClass({
     return {
       privilege: {
         referrals: 0,
-        count: require('../../../config.js').baseFollowers
+        count: config.baseFollowers
       }
     };
   },
@@ -51,7 +52,7 @@ var Dashboard = React.createClass({
         <div className="row">
           <div className="col-md-4">
             <h2>Referrals</h2>
-            <p>You've referred {people}. When you get people to sign up using your referral link, you'll get more followers!</p>
+            <p>You've referred {people}. For each person you get to sign up using your referral link, you'll get <strong>{config.referralBonus}</strong> more followers!</p>
             <h3>Your referral link</h3>
             <input id="referLink" type="text" className="form-control" value={window.location.origin + '/?ref=' + this.props.user.login} readOnly={true} onFocus={this.selectReferLink} />
           </div>
