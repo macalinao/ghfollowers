@@ -4,9 +4,10 @@
   "description": "Get GitHub followers.",
   "main": "app.js",
   "scripts": {
-    "test": "./node_modules/bin/mocha",
-    "postinstall": "./node_modules/bin/gulp prepare"
+    "test": "./node_modules/.bin/mocha -R spec",
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp prepare"
   },
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/simplyianm/githubfollowers.git"
