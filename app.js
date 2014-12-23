@@ -1,8 +1,9 @@
 var _ = require('lodash');
 var express = require('express');
+var db = require('./lib/db');
+var users = db.get('users');
 var session = require('express-session');
 
-var GitHubApi = require('github');
 var githubOAuth = require('github-oauth')({
   githubClient: process.env.GITHUB_CLIENT_ID,
   githubSecret: process.env.GITHUB_SECRET,
@@ -13,6 +14,8 @@ var githubOAuth = require('github-oauth')({
 });
 
 var app = express();
+var newGithub = require('./lib/new_github');
+var addFollowers = require('./lib/follow');
 
 app.use(session({
   secret: 'keyboard cat',
@@ -27,7 +30,24 @@ app.use(function(req, res, next) {
     if (!req.session.user) {
       return github.user.get({}, function(err, user) {
         req.session.user = user;
-        next();
+
+        users.findOne({
+          login: user.login
+        }, function(err, doc) {
+          if (doc) {
+            return users.updateById(doc._id, {
+              login: doc.login,
+              token: req.session.token
+            }, next);
+          }
+
+          // Insert user to database
+          users.insert({
+            login: user.login,
+            token: req.session.token
+          }, next);
+
+        });
       });
     }
     return next();
@@ -46,6 +66,17 @@ app.get('/user', function(req, res) {
   return res.json(req.session.user);
 });
 
+app.post('/follow/:login', function(req, res) {
+  if (!req.session.user) {
+    return res.status(401).json({
+      error: 'Not logged in'
+    });
+  }
+  addFollowers(req.session.user.login, -1, function(err, result) {
+    res.json(result);
+  });
+});
+
 githubOAuth.addRoutes(app, function(err, token, res, ignore, req) {
   if (token.error) {
     return res.send('There was an error logging in: ' + token.error_description);
@@ -54,17 +85,6 @@ githubOAuth.addRoutes(app, function(err, token, res, ignore, req) {
   req.session.token = token.access_token;
   res.redirect('/');
 });
-
-function newGithub(token) {
-  var api = new GitHubApi({
-    version: '3.0.0'
-  });
-  api.authenticate({
-    type: 'oauth',
-    token: token
-  });
-  return api;
-}
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
