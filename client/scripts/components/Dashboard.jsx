@@ -61,12 +61,24 @@ var Dashboard = React.createClass({
       });
     }
 
+    var getFollowers;
+    if (!this.state.amount) {
+      getFollowers = <p>You can't get any more followers at this time. Refer some friends to get more!</p>;
+    } else {
+      getFollowers = (
+        <div>
+          <p>You can get <strong>{this.state.amount}</strong> more followers by clicking the button below!</p>
+          <button className="btn btn-primary btn-lg" onClick={this.follow}>Get Followers</button>
+        </div>
+      );
+    }
+
     return (
       <div>
         <div className="row">
           <div className="col-md-12 text-center">
-            <p>Welcome, {this.props.user.login}</p>
-            <button className="btn btn-primary btn-lg" onClick={this.follow}>Get Followers</button>
+            <p>Hi {this.props.user.login}!</p>
+            {getFollowers}
           </div>
         </div>
         <div className="row">
