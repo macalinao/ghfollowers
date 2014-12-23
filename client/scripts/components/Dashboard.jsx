@@ -2,6 +2,8 @@ var $ = require('jquery');
 var config = require('../../../config.js');
 var React = require('react');
 
+var Follower = require('./Follower.jsx');
+
 // Quick fix
 if (!window.location.origin) {
   window.location.origin = window.location.protocol+"//"+window.location.host;
@@ -13,14 +15,16 @@ var Dashboard = React.createClass({
       privilege: {
         referrals: 0,
         count: config.baseFollowers
-      }
+      },
+      following: []
     };
   },
 
   componentDidMount: function() {
-    $.get('/privilege', function(res) {
+    $.get('/me', function(res) {
       this.setState({
-        privilege: res
+        privilege: res.privilege,
+        following: res.following
       });
     }.bind(this));
   },
@@ -41,6 +45,15 @@ var Dashboard = React.createClass({
     var peopleCt = this.state.privilege.referrals;
     var people = peopleCt === 1 ? (peopleCt + ' person') : (peopleCt + ' people');
 
+    var followerList;
+    if (this.state.following.length === 0) {
+      followerList = <p>You aren't following anyone. Click the "Get Followers" button to get some followers!</p>;
+    } else {
+      followerList = this.state.following.map(function(follower) {
+        return <Follower follower={follower} />;
+      });
+    }
+
     return (
       <div>
         <div className="row">
@@ -59,7 +72,7 @@ var Dashboard = React.createClass({
           <div className="col-md-8">
             <h2>Your followed users</h2>
             <p>Below are the people you're following that are part of this website.</p>
-            ...todo...
+            {followerList}
           </div>
         </div>
       </div>
