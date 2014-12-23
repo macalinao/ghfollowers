@@ -31,9 +31,9 @@ var App = React.createClass({
           <div className="col-md-12">
             <h1>GitHub Followers</h1>
             <p className="subtitle">Get <strong>free GitHub followers</strong> by automatically following other users.</p>
-            {page}
           </div>
         </div>
+        {page}
       </div>
     );
   }
