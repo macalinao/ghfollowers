@@ -6,11 +6,11 @@ var Login = React.createClass({
     return (
       <div>
         <div className="row">
-          <div className="col-md-12">
-            <p>Sign in to GitHub to start!</p>
+          <div className="col-md-12 text-center">
             <a className="btn btn-primary btn-lg" href={loginLink}>
               Login with GitHub
             </a>
+            <p className="subbutton">All we need is the ability to follow users as your account!</p>
           </div>
         </div>
         <div className="row">
@@ -20,7 +20,7 @@ var Login = React.createClass({
           </div>
           <div className="col-md-4">
             <h2>Is this allowed? Is it safe?</h2>
-            <p><strong>Absolutely yes.</strong> The GitHub terms of service only state that you are responsible for all activity that occurs under your account. Because all we ask for is the <code>user:follow</code> permission, we can't do anything malicious with your account. In fact, the source code to this website is available <a href="https://github.com/simplyianm/githubfollowers">here</a>!</p>
+            <p><strong>Absolutely.</strong> The GitHub terms of service only state that you are responsible for all activity that occurs under your account. Because all we ask for is the <code>user:follow</code> permission, we can't do anything malicious with your account. In fact, the source code to this website is available <a href="https://github.com/simplyianm/githubfollowers">here</a>!</p>
           </div>
           <div className="col-md-4">
             <h2>Can I unfollow users I've automatically followed?</h2>

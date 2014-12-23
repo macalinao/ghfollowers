@@ -28,9 +28,9 @@ var App = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
-            <h1>GitHub Followers</h1>
-            <p className="subtitle">Get <strong>free GitHub followers</strong> by automatically following other users.</p>
+          <div className="col-md-12 text-center">
+            <h1 id="logo">GitHub Followers</h1>
+            <p className="subtitle">Follow and get GitHub followers.</p>
           </div>
         </div>
         {page}
