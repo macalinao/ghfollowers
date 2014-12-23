@@ -8,6 +8,11 @@ app.use(require('express-session')({
   saveUninitialized: true
 }));
 
+// Body parser
+app.use(require('body-parser').urlencoded({
+  extended: true
+}));
+
 // Prerender for SEO
 app.use(require('prerender-node'));
 
@@ -16,6 +21,10 @@ app.use(require('./lib/github_user_middleware'));
 
 // SPA
 app.use(express.static('dist/'));
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(require('morgan')('dev'));
+}
 
 // Routes
 require('./lib/routes')(app);
