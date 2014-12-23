@@ -26,9 +26,6 @@ var Dashboard = React.createClass({
 
   follow: function() {
     $.post('/follow/' + this.props.user.login, function(res) {
-      if (res.limitReached) {
-        alert('There aren\'t enough people registered to give you the full amount of followers. Invite more people!');
-      }
       this.updateMe();
     }.bind(this));
   },
