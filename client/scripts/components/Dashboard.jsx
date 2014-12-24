@@ -50,10 +50,10 @@ var Dashboard = React.createClass({
 
     var getFollowers;
     if (!this.state.amount) {
-      if (this.state.followerCt >= this.state.cap) {
+      if (this.state.followerCt >= this.state.privilege.count) {
         getFollowers = <p>You have reached the maximum amount of followers. Refer some friends to increase your limit!</p>;
       } else {
-        getFollowers = <p>There aren't enough users on the website to get you more followers. Refer your friends to increase your follower count!</p>
+        getFollowers = <p>There aren't enough users on the website to get you more followers. Refer your friends to increase your follower count!</p>;
       }
     } else {
       getFollowers = (
