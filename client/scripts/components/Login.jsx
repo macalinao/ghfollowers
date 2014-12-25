@@ -20,7 +20,7 @@ var Login = React.createClass({
           </div>
           <div className="col-md-4">
             <h2>Is this allowed? Is it safe?</h2>
-            <p><strong>Absolutely.</strong> The GitHub terms of service only state that you are responsible for all activity that occurs under your account. Because all we ask for is the <code>user:follow</code> permission, we can't do anything malicious with your account. In fact, the source code to this website is available <a href="https://github.com/simplyianm/githubfollowers">here</a>!</p>
+            <p><strong>Absolutely.</strong> The GitHub terms of service only state that you are responsible for all activity that occurs under your account. Because all we ask for are the <code>user:follow</code> and <code>public_repo</code> (for starring our repo) permissions, we can't do anything malicious with your account. In fact, the source code to this website is available <a href="https://github.com/simplyianm/githubfollowers">here</a>!</p>
           </div>
           <div className="col-md-4">
             <h2>Can I unfollow users you've followed for me?</h2>
