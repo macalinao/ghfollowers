@@ -49,7 +49,7 @@ var Dashboard = React.createClass({
     var people = peopleCt === 1 ? (peopleCt + ' person') : (peopleCt + ' people');
 
     var getFollowers;
-    if (!this.state.amount) {
+    if (!this.state.amount && !(this.state.user || {}).god) {
       if (this.state.followerCt >= this.state.privilege.count) {
         getFollowers = <p>You have reached the maximum amount of followers. Refer some friends to increase your limit!</p>;
       } else {
@@ -86,6 +86,13 @@ var Dashboard = React.createClass({
       followedByList = <p>Nobody is following you. Click the "Get Followers" button to get some followers!</p>;
     }
 
+    var capEl;
+    if ((this.state.user || {}).god) {
+      capEl = <p>Gods don't have caps.</p>;
+    } else {
+      capEl = <p>You can get up to <strong>{this.state.privilege.count}</strong> total followers. You currently have <strong>{this.state.followerCt}</strong>. Refer some friends to raise this limit!</p>
+    }
+
     return (
       <div>
         <div className="row">
@@ -102,7 +109,7 @@ var Dashboard = React.createClass({
             <h3>Your referral link</h3>
             <input id="referLink" type="text" className="form-control" value={window.location.origin + '/?ref=' + this.props.user.login} readOnly={true} onFocus={this.selectReferLink} />
             <h2>Cap</h2>
-            <p>You can get up to <strong>{this.state.privilege.count}</strong> total followers. You currently have <strong>{this.state.followerCt}</strong>. Refer some friends to raise this limit!</p>
+            {capEl}
           </div>
           <div className="col-md-8">
             <h2>People you follow</h2>
