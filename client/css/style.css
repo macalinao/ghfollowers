@@ -22,3 +22,7 @@
 #getFollowers {
   margin-bottom: 10px;
 }
+
+.follower {
+  display: inline-block;
+}
