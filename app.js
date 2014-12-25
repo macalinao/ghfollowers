@@ -1,3 +1,9 @@
+var P = require('bluebird');
+P.onPossiblyUnhandledRejection(function(e, promise) {
+  console.error('Unhandled error!');
+  console.error(e.stack ? e.stack : e);
+});
+
 var express = require('express');
 
 var app = express();
@@ -34,8 +40,9 @@ if (process.env.NODE_ENV === 'development') {
 
 // Ghetto error handling
 app.use(function(err, req, res, next) {
-  console.error(err, err.stack);
-  res.send('Error');
+  var print = err.stack ? err.stack : err;
+  console.error(print);
+  res.send(print);
 });
 
 // Routes
