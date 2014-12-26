@@ -33,7 +33,7 @@ var Dashboard = React.createClass({
   },
 
   unfollow: function() {
-    $.post('/follow', function(res) {
+    $.post('/unfollow', function(res) {
       this.updateMe();
     }.bind(this));
   },
