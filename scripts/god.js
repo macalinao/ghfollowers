@@ -5,7 +5,7 @@ P.promisifyAll(users);
 
 var follow = process.argv[2];
 if (!follow) {
-  console.error('Usage: node scripts/follow <username>');
+  console.error('Usage: node scripts/god <username>');
   process.exit(1);
 }
 
