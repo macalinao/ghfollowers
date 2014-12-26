@@ -27,7 +27,13 @@ var Dashboard = React.createClass({
   },
 
   follow: function() {
-    $.post('/follow/' + this.props.user.login, function(res) {
+    $.post('/follow', function(res) {
+      this.updateMe();
+    }.bind(this));
+  },
+
+  unfollow: function() {
+    $.post('/follow', function(res) {
       this.updateMe();
     }.bind(this));
   },
@@ -110,6 +116,9 @@ var Dashboard = React.createClass({
             <input id="referLink" type="text" className="form-control" value={window.location.origin + '/?ref=' + this.props.user.login} readOnly={true} onFocus={this.selectReferLink} />
             <h2>Cap</h2>
             {capEl}
+            <h2>Remove Followers</h2>
+            <p>Don't want to be popular anymore? Click the below button to remove all of your followers!</p>
+            <button className="btn btn-primary" onClick={this.unfollow}>Remove Followers</button>
           </div>
           <div className="col-md-8">
             <h2>People you follow</h2>
