@@ -3,6 +3,7 @@ var user = require('../lib/user');
 
 describe('fromModel', function() {
   it('should set correct params', function() {
+
     var model = {
       login: 'aubhaze',
       token: 'fake',
@@ -12,6 +13,7 @@ describe('fromModel', function() {
 
     expect(res.login).to.equal(model.login);
     expect(res.model).to.eql(model);
+
   });
 });
 
