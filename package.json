@@ -57,5 +57,9 @@
     "rimraf": "^2.2.8",
     "run-sequence": "^1.0.2",
     "vinyl-source-stream": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0"
   }
 }
