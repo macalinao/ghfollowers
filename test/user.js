@@ -2,17 +2,14 @@ var _ = require('lodash');
 var expect = require('chai').expect;
 var user = require('../lib/user');
 var fixtures = require('./fixtures');
+var sinon = require('sinon');
 
 describe('isFollowing', function() {
-  var joe;
-
-  beforeEach(function() {
-    joe = fixtures.newJoe();
-    joe.github.user.getFollowUser = function(any, cb) {
-      if (any.user === 'test') cb(null, true);
-      cb('error', false);
-    };
-  });
+  var joe = fixtures.newJoe();
+  joe.github.user.getFollowUser = function(any, cb) {
+    if (any.user === 'test') cb(null, true);
+    cb('error', false);
+  };
 
   it('should return true if following', function(done) {
     joe.isFollowing('test').then(function(res) {
@@ -24,6 +21,28 @@ describe('isFollowing', function() {
     joe.isFollowing('notfollowing').then(function(res) {
       expect(res).to.be.false;
     }).then(done, done);
+  });
+
+});
+
+describe('follow', function() {
+  var joe = fixtures.newJoe();
+  joe.github.user.followUser = function(obj, cb) {
+    if (obj.user === 'success') return cb(null, 'followed');
+    if (obj.user === 'fail_req') return cb('fail', null);
+    cb(null, null); // fail res
+  };
+
+  it('should update the database if follow user succeeds', function(done) {
+    // todo
+  });
+
+  it('should not update if follow user request fails', function(done) {
+    // todo
+  });
+
+  it('should not update if follow user fails', function(done) {
+    // todo
   });
 
 });
