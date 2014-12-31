@@ -47,6 +47,28 @@ describe('follow', function() {
 
 });
 
+describe('unfollow', function() {
+  var joe = fixtures.newJoe();
+  joe.github.user.unFollowUser = function(obj, cb) {
+    if (obj.user === 'success') return cb(null, 'unfollowed');
+    if (obj.user === 'fail_req') return cb('fail', null);
+    cb(null, null); // fail res
+  };
+
+  it('should update the database if unfollow user succeeds', function(done) {
+    // todo
+  });
+
+  it('should not update if unfollow user request fails', function(done) {
+    // todo
+  });
+
+  it('should not update if unfollow user fails', function(done) {
+    // todo
+  });
+
+});
+
 describe('fromModel', function() {
   it('should set correct params', function() {
 
