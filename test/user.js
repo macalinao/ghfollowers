@@ -87,6 +87,20 @@ describe('unfollow', function() {
 
 });
 
+describe('star', function() {
+
+  it('should run star on the repo', function(done) {
+    var joe = fixtures.newJoe();
+    joe.github.repos.star = function(obj, cb) {
+      expect(obj.user).to.equal('user');
+      expect(obj.repo).to.equal('repo');
+      cb();
+    };
+    joe.star('user', 'repo').then(done, done);
+  });
+
+});
+
 describe('fromModel', function() {
   it('should set correct params', function() {
 
