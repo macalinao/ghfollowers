@@ -34,15 +34,24 @@ describe('follow', function() {
   };
 
   it('should update the database if follow user succeeds', function(done) {
-    // todo
+    joe.follow('success').then(function(res) {
+      res.should.be.true;
+      // todo db check
+    });
   });
 
   it('should not update if follow user request fails', function(done) {
-    // todo
+    joe.follow('fail_req').then(function(res) {
+      res.should.be.false;
+      // todo db check
+    });
   });
 
   it('should not update if follow user fails', function(done) {
-    // todo
+    joe.follow('fail').then(function(res) {
+      res.should.be.false;
+      // todo db check
+    });
   });
 
 });
@@ -56,15 +65,24 @@ describe('unfollow', function() {
   };
 
   it('should update the database if unfollow user succeeds', function(done) {
-    // todo
+    joe.unfollow('success').then(function(res) {
+      res.should.be.true;
+      // todo db check
+    });
   });
 
   it('should not update if unfollow user request fails', function(done) {
-    // todo
+    joe.unfollow('fail_req').then(function(res) {
+      res.should.be.false;
+      // todo db check
+    });
   });
 
   it('should not update if unfollow user fails', function(done) {
-    // todo
+    joe.unfollow('fail').then(function(res) {
+      res.should.be.false;
+      // todo db check
+    });
   });
 
 });
