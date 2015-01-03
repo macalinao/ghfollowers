@@ -62,6 +62,9 @@
   },
   "devDependencies": {
     "chai": "^1.10.0",
+    "gulp-filter": "^2.0.0",
+    "gulp-rev-replace": "^0.3.1",
+    "gulp-useref": "^1.1.0",
     "mocha": "^2.1.0",
     "sinon": "^1.10.3"
   }

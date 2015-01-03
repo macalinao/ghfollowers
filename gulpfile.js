@@ -9,6 +9,9 @@ var minifyHtml = require('gulp-minify-html');
 var reactify = require('reactify');
 var rev = require('gulp-rev');
 var rimraf = require('rimraf');
+var useref = require('gulp-useref');
+var filter = require('gulp-filter');
+var revReplace = require('gulp-rev-replace');
 var runSequence = require('run-sequence');
 var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
@@ -39,26 +42,26 @@ gulp.task('copy', ['clean'], function() {
 
 gulp.task('default', ['browserify', 'styles', 'copy'], function() {});
 
-gulp.task('uglify-js', function() {
-  gulp.src(['dist/app.js'])
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/'));
-});
+gulp.task('dist', ['default'], function(cb) {
+  var jsFilter = filter("**/*.js");
+  var cssFilter = filter("**/*.css");
 
-gulp.task('minify-css', function() {
-  gulp.src(['dist/style.css'])
-    .pipe(minifyCss())
-    .pipe(gulp.dest('dist/'));
-});
+  var assets = useref.assets();
 
-gulp.task('pack-html', function() {
-  gulp.src(['dist/index.html'])
-    .pipe(minifyHtml())
+  return gulp.src('dist/index.html')
+    .pipe(assets)
+    .pipe(jsFilter)
+    .pipe(uglify()) // Minify any javascript sources
+    .pipe(jsFilter.restore())
+    .pipe(cssFilter)
+    .pipe(minifyCss()) // Minify any CSS sources
+    .pipe(cssFilter.restore())
+    .pipe(rev()) // Rename the concatenated files
+    .pipe(assets.restore())
+    .pipe(useref())
+    .pipe(revReplace()) // Substitute in new filenames
     .pipe(gulp.dest('dist/'));
-});
 
-gulp.task('dist', function(cb) {
-  runSequence('default', ['uglify-js', 'minify-css', 'pack-html'], cb);
 });
 
 gulp.task('watch', ['default'], function() {
