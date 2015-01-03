@@ -36,7 +36,7 @@ gulp.task('styles', ['clean'], function() {
 });
 
 gulp.task('copy', ['clean'], function() {
-  gulp.src(['public/*'])
+  gulp.src(['public/**/*'])
     .pipe(gulp.dest('dist/'));
 });
 

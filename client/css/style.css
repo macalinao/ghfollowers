@@ -1,6 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Lato:400,700');
-@import url('http://fonts.googleapis.com/css?family=Montserrat');
-
+@import url('http://fonts.googleapis.com/css?family=Montserrat:700');
 #logo {
   font-family: Lato, Arial, sans-serif;
   font-size: 7em;
@@ -26,4 +25,53 @@
 .follower {
   display: inline-block;
   margin: 20px;
+}
+
+.splash {
+  background: -webkit-linear-gradient(#1CA8DD, #425F9C);
+  background: -o-linear-gradient(#1CA8DD, #425F9C);
+  background: -moz-linear-gradient(#1CA8DD, #425F9C);
+  background: linear-gradient(#1CA8DD, #425F9C);
+}
+
+.splash {
+  text-align: center;
+  color: #fff;
+}
+
+.splash h1 {
+  font-family: Montserrat, sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+}
+
+.splash p {
+  font-family: Montserrat, sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.btn-github {
+  color: #fff;
+  background-color: #444;
+  border-color: rgba(0, 0, 0, 0.2)
+  font-size: 50px;
+}
+
+.btn-github:hover,
+.btn-github:focus,
+.btn-github:active,
+.btn-github.active,
+.open>.dropdown-toggle.btn-github {
+  color: #fff;
+  background-color: #2b2b2b;
+  border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-github:active,
+.btn-github.active,
+.open>.dropdown-toggle.btn-github {
+  background-image: none
 }
