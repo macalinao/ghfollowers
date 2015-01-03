@@ -51,15 +51,17 @@ gulp.task('dist', ['default'], function(cb) {
   return gulp.src('dist/index.html')
     .pipe(assets)
     .pipe(jsFilter)
-    .pipe(uglify()) // Minify any javascript sources
+    .pipe(uglify())
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
-    .pipe(minifyCss()) // Minify any CSS sources
+    .pipe(minifyCss())
     .pipe(cssFilter.restore())
-    .pipe(rev()) // Rename the concatenated files
+    .pipe(rev())
     .pipe(assets.restore())
     .pipe(useref())
-    .pipe(revReplace()) // Substitute in new filenames
+    .pipe(revReplace({
+      replaceInExtensions: ['.html']
+    }))
     .pipe(gulp.dest('dist/'));
 
 });
