@@ -75,3 +75,9 @@
 .open>.dropdown-toggle.btn-github {
   background-image: none
 }
+
+.splash-text {
+  background: url(/img/octocat.png) no-repeat center;
+  min-height: 400px;
+  padding-top: 200px;
+}

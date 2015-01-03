@@ -6,7 +6,6 @@ var Login = React.createClass({
     return (
       <div>
         <div className="jumbotron splash">
-          <img src="/img/octocat.png" class="octocat" />
           <div className="container splash-text">
             <div className="row">
               <div className="col-md-12">
