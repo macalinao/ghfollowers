@@ -2,7 +2,7 @@ var $ = require('jquery');
 var config = require('../../../config.js');
 var React = require('react');
 
-var Follower = require('./Follower.jsx');
+var UserList = require('./UserList.jsx');
 var Cap = require('./Cap.jsx');
 var GetFollowers = require('./GetFollowers.jsx');
 var RemoveFollowers = require('./RemoveFollowers.jsx');
@@ -32,13 +32,22 @@ var Dashboard = React.createClass({
 
   render: function() {
 
+    if (!this.state.me) {
+      return (
+        <div className="container">
+          <div className="col-md-12 text-center">
+            <h1>Loading...</h1>
+            <i className="fa fa-4x fa-spinner fa-spin"></i>
+          </div>
+        </div>
+      );
+    }
+
     var followingList;
-    if (this.state.following.length === 0) {
+    if (this.state.me.following.length === 0) {
       followingList = <p>You aren't following anyone yet.</p>;
     } else {
-      followingList = this.state.following.map(function(follower) {
-        return <Follower key={follower.login} follower={follower} />;
-      });
+      followingList = <UserList users={this.state.me.following} />
     }
 
     var followedByList;
@@ -54,16 +63,6 @@ var Dashboard = React.createClass({
       followedByList = <p>Nobody is following you. Click the "Get Followers" button to get some followers!</p>;
     }
 
-    if (!this.state.me) {
-      return (
-        <div className="container">
-          <div className="col-md-12 text-center">
-            <h1>Loading...</h1>
-            <i className="fa fa-4x fa-spinner fa-spin"></i>
-          </div>
-        </div>
-      );
-    }
 
     return (
       <div className="container">
