@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var React = require('react');
 var UserList = require('./UserList.jsx');
+var ProgressBar = require('react-bootstrap/ProgressBar');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -22,7 +23,9 @@ module.exports = React.createClass({
   render: function() {
     var list;
     if (!this.state.users) {
-      list = <p>Loading...</p>;
+      list = (
+        <ProgressBar active now={100} />
+      );
     } else {
       list = <UserList users={this.state.users} />
     }

@@ -81,3 +81,7 @@
   min-height: 400px;
   padding-top: 200px;
 }
+
+.full {
+  width: 100%;
+}
