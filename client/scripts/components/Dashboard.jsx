@@ -100,9 +100,10 @@ var Dashboard = React.createClass({
     }
 
     return (
-      <div>
+      <div className="container">
         <div className="row">
           <div className="col-md-12 text-center">
+            <h1 className="page-header">Get followers</h1>
             <p>Hi {this.props.user.login}!</p>
             {getFollowers}
             <a className="btn btn-danger" href="/logout">Logout</a>
