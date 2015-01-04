@@ -3,6 +3,7 @@ var config = require('../../../config.js');
 var React = require('react');
 
 var Follower = require('./Follower.jsx');
+var GetFollowers = require('./GetFollowers.jsx');
 
 // Quick fix
 if (!window.location.origin) {
@@ -26,13 +27,6 @@ var Dashboard = React.createClass({
     this.updateMe();
   },
 
-  follow: function() {
-    this.setState({isLoadingFollowers: true});
-    $.post('/follow', function(res) {
-      this.updateMe();
-    }.bind(this));
-  },
-
   unfollow: function() {
     $.post('/unfollow', function(res) {
       this.updateMe();
@@ -42,7 +36,7 @@ var Dashboard = React.createClass({
   updateMe: function() {
     $.get('/me', function(res) {
       this.setState({isLoadingFollowers: false});
-      this.setState(res);
+      this.setState({me: res});
     }.bind(this));
   },
 
@@ -55,22 +49,6 @@ var Dashboard = React.createClass({
   render: function() {
     var peopleCt = this.state.privilege.referrals;
     var people = peopleCt === 1 ? (peopleCt + ' person') : (peopleCt + ' people');
-
-    var getFollowers;
-    if (!this.state.amount && !(this.state.user || {}).god) {
-      if (this.state.followerCt >= this.state.privilege.count) {
-        getFollowers = <p>You have reached the maximum amount of followers. Refer some friends to increase your limit!</p>;
-      } else {
-        getFollowers = <p>There aren't enough users on the website to get you more followers. Refer your friends to increase your follower count!</p>;
-      }
-    } else {
-      getFollowers = (
-        <div>
-          <p>You can get <strong>{this.state.amount}</strong> more follower{this.state.amount === 1 ? '' : 's'} by clicking the button below!</p>
-          <button id="getFollowers" className="btn btn-primary btn-lg" onClick={this.follow} disabled={this.state.isLoadingFollowers}>{this.state.isLoadingFollowers ? 'Loading...' : 'Get Followers'}</button>
-        </div>
-      );
-    }
 
     var followingList;
     if (this.state.following.length === 0) {
@@ -103,14 +81,7 @@ var Dashboard = React.createClass({
 
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-12 text-center">
-            <h1 className="page-header">Get followers</h1>
-            <p>Hi {this.props.user.login}!</p>
-            {getFollowers}
-            <a className="btn btn-danger" href="/logout">Logout</a>
-          </div>
-        </div>
+        <GetFollowers me={this.state.me} onFollow={this.updateMe} />
         <div className="row">
           <div className="col-md-4">
             <h2>Referrals</h2>
