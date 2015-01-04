@@ -5,6 +5,7 @@ var React = require('react');
 var Follower = require('./Follower.jsx');
 var Cap = require('./Cap.jsx');
 var GetFollowers = require('./GetFollowers.jsx');
+var RemoveFollowers = require('./RemoveFollowers.jsx');
 var Referrals = require('./Referrals.jsx');
 
 // Quick fix
@@ -14,25 +15,11 @@ if (!window.location.origin) {
 
 var Dashboard = React.createClass({
   getInitialState: function() {
-    return {
-      privilege: {
-        referrals: 0,
-        count: config.baseFollowers,
-      },
-      remaining: 0,
-      following: [],
-      followerCt: 0
-    };
+    return {};
   },
 
   componentDidMount: function() {
     this.updateMe();
-  },
-
-  unfollow: function() {
-    $.post('/unfollow', function(res) {
-      this.updateMe();
-    }.bind(this));
   },
 
   updateMe: function() {
@@ -85,9 +72,7 @@ var Dashboard = React.createClass({
           <div className="col-md-4">
             <Referrals count={this.state.me.privilege.referrals} login={this.state.me.user.login} />
             <Cap me={this.state.me} />
-            <h2>Remove Followers</h2>
-            <p>Don't want to be popular anymore? Click the below button to remove all of your followers!</p>
-            <button className="btn btn-primary" onClick={this.unfollow}>Remove Followers</button>
+            <RemoveFollowers onUnfollow={this.updateMe} />
           </div>
           <div className="col-md-8">
             <h2>People you follow</h2>
