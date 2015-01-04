@@ -4,6 +4,7 @@ var React = require('react');
 
 var Follower = require('./Follower.jsx');
 var GetFollowers = require('./GetFollowers.jsx');
+var Referrals = require('./Referrals.jsx');
 
 // Quick fix
 if (!window.location.origin) {
@@ -35,20 +36,13 @@ var Dashboard = React.createClass({
 
   updateMe: function() {
     $.get('/me', function(res) {
-      this.setState({isLoadingFollowers: false});
-      this.setState({me: res});
+      this.setState({
+        me: res
+      });
     }.bind(this));
   },
 
-  selectReferLink: function() {
-    $('#referLink').focus(function() {
-      this.select();
-    });
-  },
-
   render: function() {
-    var peopleCt = this.state.privilege.referrals;
-    var people = peopleCt === 1 ? (peopleCt + ' person') : (peopleCt + ' people');
 
     var followingList;
     if (this.state.following.length === 0) {
@@ -79,15 +73,24 @@ var Dashboard = React.createClass({
       capEl = <p>You can get up to <strong>{this.state.privilege.count}</strong> total followers. You currently have <strong>{this.state.followerCt}</strong>. Refer some friends to raise this limit!</p>
     }
 
+    var el;
+    if (!this.state.me) {
+      return (
+        <div className="container">
+          <div className="col-md-12 text-center">
+            <h1>Loading...</h1>
+            <i className="fa fa-4x fa-spinner fa-spin"></i>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="container">
         <GetFollowers me={this.state.me} onFollow={this.updateMe} />
         <div className="row">
           <div className="col-md-4">
-            <h2>Referrals</h2>
-            <p>You've referred {people}. For each person you get to sign up using your referral link, you'll get <strong>{config.referralBonus}</strong> more followers!</p>
-            <h3>Your referral link</h3>
-            <input id="referLink" type="text" className="form-control" value={window.location.origin + '/?ref=' + this.props.user.login} readOnly={true} onFocus={this.selectReferLink} />
+            <Referrals count={this.state.me.privilege.referrals} login={this.state.me.user.login} />
             <h2>Cap</h2>
             {capEl}
             <h2>Remove Followers</h2>

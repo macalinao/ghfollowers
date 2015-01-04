@@ -15,9 +15,7 @@ module.exports = React.createClass({
   render: function() {
     var me = this.props.me;
     var error;
-    if (!me){
-      error = 'Loading...';
-    } else if (me.amount === 0) {
+    if (me.amount === 0) {
       if (!me.god && me.followerCt >= me.privilege.count) {
         error = 'You have reached the maximum amount of followers. Refer some friends to increase your limit!';
       } else {
