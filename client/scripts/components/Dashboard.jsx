@@ -27,6 +27,7 @@ var Dashboard = React.createClass({
   },
 
   follow: function() {
+    this.setState({isLoadingFollowers: true});
     $.post('/follow', function(res) {
       this.updateMe();
     }.bind(this));
@@ -40,6 +41,7 @@ var Dashboard = React.createClass({
 
   updateMe: function() {
     $.get('/me', function(res) {
+      this.setState({isLoadingFollowers: false});
       this.setState(res);
     }.bind(this));
   },
@@ -65,7 +67,7 @@ var Dashboard = React.createClass({
       getFollowers = (
         <div>
           <p>You can get <strong>{this.state.amount}</strong> more follower{this.state.amount === 1 ? '' : 's'} by clicking the button below!</p>
-          <button id="getFollowers" className="btn btn-primary btn-lg" onClick={this.follow}>Get Followers</button>
+          <button id="getFollowers" className="btn btn-primary btn-lg" onClick={this.follow} disabled={this.state.isLoadingFollowers}>{this.state.isLoadingFollowers ? 'Loading...' : 'Get Followers'}</button>
         </div>
       );
     }
