@@ -6,7 +6,7 @@ module.exports = React.createClass({
     return (
       <div className="text-center user">
         <img src={user.avatar} className="img-rounded" width="50" height="50" />
-        <p><a href={'https://github.com/' + user.login}>{user.login}</a></p>
+        <p><a href={'https://github.com/' + user.login} target="_blank">{user.login}</a></p>
       </div>
     );
   }
