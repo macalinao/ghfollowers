@@ -24,13 +24,14 @@ module.exports = React.createClass({
       }
     }
 
+    var me = this.props.me;
     if (error) {
       getFollowers = <p>{error}</p>;
     } else {
       getFollowers = (
         <div>
-          <p>Hi {this.props.me.user.login}!</p>
-          <p>You can get <strong>{this.state.amount}</strong> more follower{this.state.amount === 1 ? '' : 's'} by clicking the button below!</p>
+          <p>Hi {me.user.login}!</p>
+          <p>You can get <strong>{me.amount}</strong> more follower{me.amount === 1 ? '' : 's'} by clicking the button below!</p>
           <button id="getFollowers" className="btn btn-primary btn-lg" onClick={this.follow} disabled={this.state.isLoadingFollowers}>{this.state.isLoadingFollowers ? 'Loading...' : 'Get Followers'}</button>
         </div>
       );
