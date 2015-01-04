@@ -2,7 +2,8 @@ var $ = require('jquery');
 var config = require('../../../config.js');
 var React = require('react');
 
-var UserList = require('./UserList.jsx');
+var FollowingList = require('./FollowingList.jsx');
+var FollowedByList = require('./FollowedByList.jsx');
 var Cap = require('./Cap.jsx');
 var GetFollowers = require('./GetFollowers.jsx');
 var RemoveFollowers = require('./RemoveFollowers.jsx');
@@ -43,27 +44,6 @@ var Dashboard = React.createClass({
       );
     }
 
-    var followingList;
-    if (this.state.me.following.length === 0) {
-      followingList = <p>You aren't following anyone yet.</p>;
-    } else {
-      followingList = <UserList users={this.state.me.following} />
-    }
-
-    var followedByList;
-    if (this.state.user && this.state.user.followedBy) {
-      followedByList = (
-        <ul>
-          {this.state.user.followedBy.map(function(item) {
-            return <li key={item}><a href={'https://github.com/' + item}>{item}</a></li>;
-          })}
-        </ul>
-      );
-    } else {
-      followedByList = <p>Nobody is following you. Click the "Get Followers" button to get some followers!</p>;
-    }
-
-
     return (
       <div className="container">
         <GetFollowers me={this.state.me} onFollow={this.updateMe} />
@@ -74,12 +54,8 @@ var Dashboard = React.createClass({
             <RemoveFollowers onUnfollow={this.updateMe} />
           </div>
           <div className="col-md-8">
-            <h2>People you follow</h2>
-            <p>Below are the people you follow as a result of joining this website.</p>
-            {followingList}
-            <h2>People following you</h2>
-            <p>Here are the people following you from this website.</p>
-            {followedByList}
+            <FollowingList users={this.state.me.following} />
+            <FollowedByList users={this.state.me.user.followedBy} />
           </div>
         </div>
       </div>
