@@ -1,4 +1,5 @@
 var React = require('react');
+var $ = require('jquery');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -28,7 +29,7 @@ module.exports = React.createClass({
     } else {
       getFollowers = (
         <div>
-          <p>Hi {this.props.me.login}!</p>
+          <p>Hi {this.props.me.user.login}!</p>
           <p>You can get <strong>{this.state.amount}</strong> more follower{this.state.amount === 1 ? '' : 's'} by clicking the button below!</p>
           <button id="getFollowers" className="btn btn-primary btn-lg" onClick={this.follow} disabled={this.state.isLoadingFollowers}>{this.state.isLoadingFollowers ? 'Loading...' : 'Get Followers'}</button>
         </div>
