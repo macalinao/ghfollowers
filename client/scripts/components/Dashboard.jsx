@@ -55,7 +55,7 @@ var Dashboard = React.createClass({
           </div>
           <div className="col-md-8">
             <FollowingList users={this.state.me.following} />
-            <FollowedByList users={this.state.me.user.followedBy} />
+            <FollowedByList />
           </div>
         </div>
       </div>

@@ -1,25 +1,37 @@
+var $ = require('jquery');
 var React = require('react');
+var UserList = require('./UserList.jsx');
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {};
+  },
+
+  componentDidMount: function() {
+    this.loadData();
+  },
+
+  loadData: function() {
+    $.get('/info/followers', function(res) {
+      this.setState({
+        users: res
+      });
+    }.bind(this));
+  },
+
   render: function() {
-    var followedByList;
-    if (this.props.users) {
-      followedByList = (
-        <ul>
-          {this.props.users.map(function(item) {
-            return <li key={item}><a href={'https://github.com/' + item}>{item}</a></li>;
-          })}
-        </ul>
-      );
+    var list;
+    if (!this.state.users) {
+      list = <p>Loading...</p>;
     } else {
-      followedByList = <p>Nobody is following you. Click the "Get Followers" button to get some followers!</p>;
+      list = <UserList users={this.state.users} />
     }
 
     return (
       <div>
         <h2>People following you</h2>
         <p>Here are the people following you from this website.</p>
-        {followedByList}
+        {list}
       </div>
     );
   }
