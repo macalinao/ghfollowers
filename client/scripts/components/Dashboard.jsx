@@ -3,6 +3,7 @@ var config = require('../../../config.js');
 var React = require('react');
 
 var Follower = require('./Follower.jsx');
+var Cap = require('./Cap.jsx');
 var GetFollowers = require('./GetFollowers.jsx');
 var Referrals = require('./Referrals.jsx');
 
@@ -66,14 +67,6 @@ var Dashboard = React.createClass({
       followedByList = <p>Nobody is following you. Click the "Get Followers" button to get some followers!</p>;
     }
 
-    var capEl;
-    if ((this.state.user || {}).god) {
-      capEl = <p>Gods don't have caps.</p>;
-    } else {
-      capEl = <p>You can get up to <strong>{this.state.privilege.count}</strong> total followers. You currently have <strong>{this.state.followerCt}</strong>. Refer some friends to raise this limit!</p>
-    }
-
-    var el;
     if (!this.state.me) {
       return (
         <div className="container">
@@ -91,8 +84,7 @@ var Dashboard = React.createClass({
         <div className="row">
           <div className="col-md-4">
             <Referrals count={this.state.me.privilege.referrals} login={this.state.me.user.login} />
-            <h2>Cap</h2>
-            {capEl}
+            <Cap me={this.state.me} />
             <h2>Remove Followers</h2>
             <p>Don't want to be popular anymore? Click the below button to remove all of your followers!</p>
             <button className="btn btn-primary" onClick={this.unfollow}>Remove Followers</button>
