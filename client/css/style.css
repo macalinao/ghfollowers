@@ -77,9 +77,8 @@
 }
 
 .splash-text {
-  background: url(/img/octocat.png) no-repeat center;
-  min-height: 400px;
-  padding-top: 200px;
+  background: url(/img/octocat.png) no-repeat top center;
+  padding-top: 150px;
 }
 
 .full {
