@@ -16,7 +16,10 @@ if (!window.location.origin) {
 
 var Dashboard = React.createClass({
   getInitialState: function() {
-    return {};
+    return {
+      followers: null,
+      following: null
+    };
   },
 
   componentDidMount: function() {
@@ -27,6 +30,24 @@ var Dashboard = React.createClass({
     $.get('/me', function(res) {
       this.setState({
         me: res
+      });
+    }.bind(this));
+    this.loadFollowers();
+    this.loadFollowing();
+  },
+
+  loadFollowers: function() {
+    $.get('/info/followers', function(res) {
+      this.setState({
+        followers: res
+      });
+    }.bind(this));
+  },
+
+  loadFollowing: function() {
+    $.get('/info/following', function(res) {
+      this.setState({
+        following: res
       });
     }.bind(this));
   },
@@ -54,8 +75,8 @@ var Dashboard = React.createClass({
             <RemoveFollowers onUnfollow={this.updateMe} />
           </div>
           <div className="col-md-8">
-            <FollowingList users={this.state.me.following} />
-            <FollowedByList />
+            <FollowingList users={this.state.following} />
+            <FollowedByList users={this.state.followers} />
           </div>
         </div>
       </div>

@@ -1,33 +1,16 @@
-var $ = require('jquery');
-var ProgressBar = require('react-bootstrap/ProgressBar');
 var React = require('react');
 var UserList = require('./UserList.jsx');
+var ProgressBar = require('react-bootstrap/ProgressBar');
 
 module.exports = React.createClass({
-  getInitialState: function() {
-    return {};
-  },
-
-  componentDidMount: function() {
-    this.loadData();
-  },
-
-  loadData: function() {
-    $.get('/info/following', function(res) {
-      this.setState({
-        users: res
-      });
-    }.bind(this));
-  },
-
   render: function() {
     var list;
-    if (!this.state.users) {
+    if (!this.props.users) {
       list = (
         <ProgressBar active now={100} />
       );
     } else {
-      list = <UserList users={this.state.users} />
+      list = <UserList users={this.props.users} />
     }
 
     return (
