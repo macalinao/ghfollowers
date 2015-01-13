@@ -9,6 +9,22 @@ githubfollowers
 ### What happens if I unfollow people/revoke my token?
 We'll permanently lower your cap. This app depends on having legitimate, non-botted people following each other, so breaking the trust destroys our service. We'll lower your follower cap to compensate for the unfollowed user.
 
+## Setup
+
+To setup the dev environment, run the following commands:
+
+```
+$ npm install -g gulp
+$ npm install
+```
+
+Then run:
+
+
+```
+$ gulp watch
+```
+
 ## License
 MIT
 
