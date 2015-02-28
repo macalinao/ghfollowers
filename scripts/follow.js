@@ -7,6 +7,7 @@ if (!follow) {
 }
 
 user.fromLogin(follow).then(function(user) {
+  if (!user) return;
   return [user, user.addFollowers(-1)];
 }).spread(function(user, res) {
   console.log('Added', res.follows, 'followers to', user.login);
