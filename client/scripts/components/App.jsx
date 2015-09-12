@@ -31,7 +31,7 @@ var App = React.createClass({
         <div className="container">
           <div className="row padded">
             <div className="col-md-12 text-center">
-              <p>Made by <a href="https://twitter.com/simplyianm">@simplyianm</a>. <a href="https://github.com/simplyianm/githubfollowers">View on GitHub</a></p>
+              <p>Made by <a href="https://twitter.com/simplyianm">@simplyianm</a>. <a href="https://github.com/simplyianm/ghfollowers">View on GitHub</a></p>
               <p>The Octocat logo is property of GitHub, Inc.</p>
             </div>
           </div>
