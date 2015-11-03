@@ -2,12 +2,12 @@
 
 import gulp from 'gulp';
 
+import babelify from 'babelify';
 import bower from 'main-bower-files';
 import browserify from 'browserify';
 import concat from 'gulp-concat';
 import minifyCss from 'gulp-minify-css';
 import minifyHtml from 'gulp-minify-html';
-import reactify from 'reactify';
 import rev from 'gulp-rev';
 import rimraf from 'rimraf';
 import useref from 'gulp-useref';
@@ -22,10 +22,13 @@ gulp.task('clean', (cb) => {
 });
 
 gulp.task('browserify', ['clean'], () => {
-  var b = browserify();
-  b.transform(reactify); // use the reactify transform
-  b.add('./client/scripts/app.jsx');
-  return b.bundle()
+  const extensions = ['.js', '.jsx'];
+  return browserify({ extensions })
+    .transform(babelify.configure({
+      extensions
+    }))
+    .require('./client/scripts/app.jsx', { entry: true })
+    .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('dist/'));
 });
