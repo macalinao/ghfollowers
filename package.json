@@ -26,6 +26,9 @@
   "homepage": "https://github.com/simplyianm/githubfollowers",
   "dependencies": {
     "async": "^0.9.0",
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.25",
+    "babelify": "^7.2.0",
     "backbone": "^1.1.2",
     "bluebird": "^2.4.2",
     "body-parser": "^1.10.0",
@@ -38,7 +41,7 @@
     "flux": "^2.0.1",
     "github": "^0.2.3",
     "github-oauth": "^0.2.0",
-    "gulp": "^3.8.10",
+    "gulp": "^3.9.0",
     "gulp-concat": "^2.4.2",
     "gulp-filter": "^2.0.0",
     "gulp-minify-css": "^0.3.11",

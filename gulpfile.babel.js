@@ -1,26 +1,27 @@
 'use strict';
 
-var gulp = require('gulp');
-var bower = require('main-bower-files');
-var browserify = require('browserify');
-var concat = require('gulp-concat');
-var minifyCss = require('gulp-minify-css');
-var minifyHtml = require('gulp-minify-html');
-var reactify = require('reactify');
-var rev = require('gulp-rev');
-var rimraf = require('rimraf');
-var useref = require('gulp-useref');
-var filter = require('gulp-filter');
-var revReplace = require('gulp-rev-replace');
-var runSequence = require('run-sequence');
-var source = require('vinyl-source-stream');
-var uglify = require('gulp-uglify');
+import gulp from 'gulp';
 
-gulp.task('clean', function(cb) {
+import bower from 'main-bower-files';
+import browserify from 'browserify';
+import concat from 'gulp-concat';
+import minifyCss from 'gulp-minify-css';
+import minifyHtml from 'gulp-minify-html';
+import reactify from 'reactify';
+import rev from 'gulp-rev';
+import rimraf from 'rimraf';
+import useref from 'gulp-useref';
+import filter from 'gulp-filter';
+import revReplace from 'gulp-rev-replace';
+import runSequence from 'run-sequence';
+import source from 'vinyl-source-stream';
+import uglify from 'gulp-uglify';
+
+gulp.task('clean', (cb) => {
   rimraf('dist/', cb);
 });
 
-gulp.task('browserify', ['clean'], function() {
+gulp.task('browserify', ['clean'], () => {
   var b = browserify();
   b.transform(reactify); // use the reactify transform
   b.add('./client/scripts/app.jsx');
@@ -29,20 +30,20 @@ gulp.task('browserify', ['clean'], function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('styles', ['clean'], function() {
+gulp.task('styles', ['clean'], () => {
   gulp.src(['bower_components/bootstrap/dist/css/bootstrap.css', 'client/css/*'])
     .pipe(concat('style.css'))
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('copy', ['clean'], function() {
+gulp.task('copy', ['clean'], () => {
   gulp.src(['public/**/*'])
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('default', ['browserify', 'styles', 'copy'], function() {});
+gulp.task('default', ['browserify', 'styles', 'copy'], () => {});
 
-gulp.task('dist', ['default'], function(cb) {
+gulp.task('dist', ['default'], (cb) => {
   var jsFilter = filter("**/*.js");
   var cssFilter = filter("**/*.css");
 
@@ -66,6 +67,6 @@ gulp.task('dist', ['default'], function(cb) {
 
 });
 
-gulp.task('watch', ['default'], function() {
+gulp.task('watch', ['default'], () => {
   gulp.watch('client/**/*', ['default']);
 });
