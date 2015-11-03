@@ -1,21 +1,24 @@
-var $ = require('jquery');
-var React = require('react');
+import $ from 'jquery';
+import React from 'react';
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {};
+export default React.createClass({
+
+  getInitialState() {
+    return {
+      isLoadingFollowers: false
+    };
   },
 
-  follow: function() {
-    this.setState({isLoadingFollowers: true});
-    $.post('/follow', function(res) {
+  follow() {
+    this.setState({ isLoadingFollowers: true });
+    $.post('/follow', (res) => {
       this.props.onFollow();
-    }.bind(this));
+    });
   },
 
-  render: function() {
-    var me = this.props.me;
-    var error;
+  render() {
+    const me = this.props.me;
+    let error;
     if (me.amount === 0) {
       if (!me.user.god && me.followerCt >= me.privilege.count) {
         error = 'You have reached the maximum amount of followers. Refer some friends to increase your limit!';
@@ -24,7 +27,8 @@ module.exports = React.createClass({
       }
     }
 
-    var me = this.props.me;
+    const me = this.props.me;
+    let getFollowers;
     if (error) {
       getFollowers = <p>{error}</p>;
     } else {
@@ -47,4 +51,5 @@ module.exports = React.createClass({
       </div>
     );
   }
+
 });

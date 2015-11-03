@@ -1,24 +1,27 @@
-var $ = require('jquery');
-var React = require('react');
+import $ from 'jquery';
+import React from 'react';
 
-var Login = require('./Login.jsx');
-var Dashboard = require('./Dashboard.jsx');
+import Dashboard from './Dashboard.jsx';
+import Login from './Login.jsx';
 
-var App = React.createClass({
-  getInitialState: function() {
-    return {};
+export default React.createClass({
+
+  getInitialState() {
+    return {
+      user: null
+    };
   },
 
-  componentDidMount: function() {
-    $.get('/user', function(result) {
+  componentDidMount() {
+    $.get('/user', (result) => {
       if (result.error) return;
       this.setState({
         user: result
       });
-    }.bind(this));
+    });
   },
 
-  render: function() {
+  render() {
     var page;
     if (!this.state.user) {
       page = <Login />;
@@ -39,6 +42,5 @@ var App = React.createClass({
       </div>
     );
   }
-});
 
-module.exports = App;
+});

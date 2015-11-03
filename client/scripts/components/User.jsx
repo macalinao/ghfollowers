@@ -1,8 +1,9 @@
-var React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
-  render: function() {
-    var user = this.props.user;
+export default React.createClass({
+
+  render() {
+    const { user } = this.props;
     return (
       <div className="text-center user">
         <img src={user.avatar} className="img-rounded" width="50" height="50" />
@@ -10,4 +11,5 @@ module.exports = React.createClass({
       </div>
     );
   }
+
 });

@@ -1,10 +1,12 @@
-var React = require('react');
-var UserList = require('./UserList.jsx');
-var ProgressBar = require('react-bootstrap/ProgressBar');
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import React from 'react';
 
-module.exports = React.createClass({
-  render: function() {
-    var list;
+import UserList from './UserList.jsx';
+
+export default React.createClass({
+
+  render() {
+    let list;
     if (!this.props.users) {
       list = (
         <ProgressBar active now={100} />
@@ -21,4 +23,5 @@ module.exports = React.createClass({
       </div>
     );
   }
+
 });

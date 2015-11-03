@@ -1,8 +1,9 @@
-var React = require('react');
+import React from 'react';
 
-var Login = React.createClass({
-  render: function() {
-    var loginLink = '/login' + (this.props.ref ? '?ref=' + this.props.ref : '');
+export default React.createClass({
+
+  render() {
+    const loginLink = '/login' + (this.props.ref ? '?ref=' + this.props.ref : '');
     return (
       <div>
         <div className="jumbotron splash">
@@ -45,6 +46,5 @@ var Login = React.createClass({
       </div>
     );
   }
-});
 
-module.exports = Login;
+});

@@ -1,9 +1,10 @@
-var React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
-  render: function() {
-    var me = this.props.me;
-    var message;
+export default React.createClass({
+
+  render() {
+    const { me } = this.props;
+    let message;
     if (me.user.god) {
       message = <p>Gods don't have caps.</p>;
     } else {
@@ -17,4 +18,5 @@ module.exports = React.createClass({
       </div>
     );
   }
+
 });

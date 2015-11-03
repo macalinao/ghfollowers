@@ -1,22 +1,22 @@
-var $ = require('jquery');
-var React = require('react');
+import $ from 'jquery';
+import React from 'react';
 
-module.exports = React.createClass({
-  getInitialState: function() {
+export default React.createClass({
+  getInitialState() {
     return {
       isUnfollowing: false
     };
   },
 
-  unfollow: function() {
-    this.setState({isUnfollowing: true});
-    $.post('/unfollow', function(res) {
-      this.setState({isUnfollowing: false});
+  unfollow() {
+    this.setState({ isUnfollowing: true });
+    $.post('/unfollow', (res) => {
+      this.setState({ isUnfollowing: false });
       this.props.onUnfollow();
-    }.bind(this));
+    });
   },
 
-  render: function() {
+  render() {
     return (
       <div>
         <h2>Remove Followers</h2>
@@ -25,4 +25,5 @@ module.exports = React.createClass({
       </div>
     );
   }
+
 });

@@ -1,58 +1,60 @@
-var $ = require('jquery');
-var config = require('../../../config.js');
-var React = require('react');
+import $ from 'jquery';
+import React from 'react';
 
-var FollowingList = require('./FollowingList.jsx');
-var FollowedByList = require('./FollowedByList.jsx');
-var Cap = require('./Cap.jsx');
-var GetFollowers = require('./GetFollowers.jsx');
-var RemoveFollowers = require('./RemoveFollowers.jsx');
-var Referrals = require('./Referrals.jsx');
+import config from '../../../config';
+
+import Cap from './Cap.jsx';
+import FollowingList from './FollowingList.jsx';
+import FollowedByList from './FollowedByList.jsx';
+import GetFollowers from './GetFollowers.jsx';
+import RemoveFollowers from './RemoveFollowers.jsx';
+import Referrals from './Referrals.jsx';
 
 // Quick fix
 if (!window.location.origin) {
-  window.location.origin = window.location.protocol+"//"+window.location.host;
+  window.location.origin = window.location.protocol + "//" + window.location.host;
 }
 
-var Dashboard = React.createClass({
-  getInitialState: function() {
+export default React.createClass({
+
+  getInitialState() {
     return {
       followers: null,
       following: null
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.updateMe();
   },
 
-  updateMe: function() {
-    $.get('/me', function(res) {
+  updateMe() {
+    $.get('/me', (res) => {
       this.setState({
         me: res
       });
-    }.bind(this));
+    });
     this.loadFollowers();
     this.loadFollowing();
   },
 
-  loadFollowers: function() {
-    $.get('/info/followers', function(res) {
+  loadFollowers() {
+    $.get('/info/followers', (res) => {
       this.setState({
         followers: res
       });
-    }.bind(this));
+    });
   },
 
-  loadFollowing: function() {
-    $.get('/info/following', function(res) {
+  loadFollowing() {
+    $.get('/info/following', (res) => {
       this.setState({
         following: res
       });
-    }.bind(this));
+    });
   },
 
-  render: function() {
+  render() {
 
     if (!this.state.me) {
       return (
@@ -82,6 +84,5 @@ var Dashboard = React.createClass({
       </div>
     );
   }
-});
 
-module.exports = Dashboard;
+});

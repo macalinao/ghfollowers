@@ -1,14 +1,17 @@
-var React = require('react');
-var User = require('./User.jsx');
+import React from 'react';
 
-module.exports = React.createClass({
-  render: function() {
+import User from './User.jsx';
+
+export default React.createClass({
+
+  render() {
     return (
       <div>
-        {this.props.users.map(function(user) {
+        {this.props.users.map((user) => {
           return <User key={user.login} user={user} />;
         })}
       </div>
     );
   }
+
 });
