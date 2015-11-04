@@ -1,26 +1,32 @@
-var P = require('bluebird');
+import P from 'bluebird';
+import bodyParser from 'body-parser';
+import express from 'express';
+import prerender from 'prerender-node';
+
+import githubUserMiddleware from './lib/github_user_middleware';
+import routes from './lib/routes';
+import session from './lib/session';
+
 P.onPossiblyUnhandledRejection(function(e, promise) {
   console.error('Unhandled error!');
   console.error(e.stack ? e.stack : e);
 });
 
-var express = require('express');
-
 var app = express();
 
 // Enable sessions
-require('./lib/session')(app);
+session(app);
 
 // Body parser
-app.use(require('body-parser').urlencoded({
+app.use(bodyParser.urlencoded({
   extended: true
 }));
 
 // Prerender for SEO
-app.use(require('prerender-node'));
+app.use(prerender);
 
 // Middleware to add GH user to request object
-app.use(require('./lib/github_user_middleware'));
+app.use(githubUserMiddleware);
 
 // Referral links
 app.use(function(req, res, next) {
@@ -46,7 +52,7 @@ app.use(function(err, req, res, next) {
 });
 
 // Routes
-require('./lib/routes')(app);
+routes(app);
 
 // Bind to port
 var port = process.env.PORT || 3000;
