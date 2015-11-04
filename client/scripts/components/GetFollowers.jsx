@@ -27,7 +27,6 @@ export default React.createClass({
       }
     }
 
-    const me = this.props.me;
     let getFollowers;
     if (error) {
       getFollowers = <p>{error}</p>;
